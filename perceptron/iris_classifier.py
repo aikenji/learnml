@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from perceptron import Perceptron
+from decision_regions import plot_decision_regions
 
 # read data from iris.data
 df = pd.read_csv('iris.data', header=None)
@@ -25,7 +26,7 @@ plt.legend(loc='upper left')
 plt.show()
 
 # learning using perceptron
-ppn = Perceptron(eta=0.1, n_iter=10)
+ppn = Perceptron(eta=0.1, n_iter=10, random_state=5)
 ppn.fit(X, Y)
 
 plt.plot(range(1, len(ppn.errors_)+1), 
@@ -34,6 +35,11 @@ plt.xlabel('Epochs')
 plt.ylabel('number of updates')
 plt.show()
 
-
+# plot decision regions
+plot_decision_regions(X, Y, classifier=ppn)
+plt.xlabel('sepal length [cm]')
+plt.ylabel('petal length [cm]')
+plt.legend(loc='upper left')
+plt.show()
 
 
